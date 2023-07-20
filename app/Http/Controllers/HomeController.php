@@ -82,7 +82,7 @@ class HomeController extends BaseController
             $message = sprintf('Wrong amount %s - correct: %s', $request['amount'], $coin->amount);
         }
 
-        $coin->update(['used_at' => new \DateTime()]);
+        $coin->update(['used_at' => new \DateTime(), 'success' => false]);
 
         Transaction::create([
             'type' => $coin->type,
