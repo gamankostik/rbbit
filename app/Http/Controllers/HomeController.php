@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Address;
+use App\Model\Coin;
 use App\Model\Transaction;
 use App\Service\CoinService;
 use Illuminate\Http\Request;
@@ -94,5 +95,10 @@ class HomeController extends BaseController
         ]);
 
         return response()->json([], $success ? 200 : 400);
+    }
+
+    public function test()
+    {
+        return view('test', ['coins' => Coin::paginate()]);
     }
 }

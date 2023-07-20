@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/test-data', [HomeController::class, 'test'])->name('test');
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/address', [HomeController::class, 'address'])->name('address');
 Route::post('/address', [HomeController::class, 'generate'])->name('generate');
