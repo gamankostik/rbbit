@@ -20,6 +20,7 @@ class CreateCoinsTable extends Migration
             $table->string('amount');
             $table->string('type');
             $table->boolean('enabled')->default(true);
+            $table->dateTime('used_at')->nullable();
             $table->timestamps();
         });
     }

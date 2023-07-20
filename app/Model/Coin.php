@@ -13,6 +13,8 @@ class Coin extends Model
         'hash',
         'type',
         'amount',
-        'enabled'
+        'enabled',
+        'used_at',
     ];
+
 }

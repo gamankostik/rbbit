@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\Controller::class, 'index'])->name('index');
-Route::get('/address', [\App\Http\Controllers\Controller::class, 'address'])->name('address');
-Route::get('/transaction', [\App\Http\Controllers\Controller::class, 'transaction'])->name('transaction');
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/address', [HomeController::class, 'address'])->name('address');
+Route::post('/address', [HomeController::class, 'generate'])->name('generate');
+Route::get('/transaction', [HomeController::class, 'transaction'])->name('transaction');
+Route::post('/transaction', [HomeController::class, 'check'])->name('check');
 

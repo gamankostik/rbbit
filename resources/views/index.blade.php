@@ -12,7 +12,7 @@
             align-items: center;
             height: 100vh;
             background-color: #0E1F32;
-            background-image: url('https://example.com/background-image.jpg');
+            background-image: url({{'background.jpg'}});
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
