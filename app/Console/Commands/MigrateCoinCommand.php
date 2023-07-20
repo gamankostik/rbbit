@@ -41,7 +41,7 @@ class MigrateCoinCommand extends Command
         print_r("Start ... \n");
         foreach (Coin::TYPE as $type) {
             if (($handle = fopen(resource_path('data/' . $type . '.csv'), "r")) !== FALSE) {
-                while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+                while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                     Coin::create(
                         [
                             'number' => $data[0],
