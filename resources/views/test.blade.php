@@ -17,6 +17,7 @@
             <th>Amount</th>
             <th>Was generated</th>
             <th>Was sent</th>
+            <th>Address to</th>
         </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
             <td>{{$coin->amount}}</td>
             <td>{{!$coin->enabled}}</td>
             <td>{{!!$coin->used_at}}</td>
+            <td>{{\App\Service\CoinService::transaction($coin->hash)->address_to ?? ''}}</td>
         </tr>
         @endforeach
         <!-- Add more rows as needed -->

@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Model\Coin;
+use App\Model\Transaction;
 
 class CoinService
 {
@@ -28,5 +29,10 @@ class CoinService
     public static function enabledCoinExists(): bool
     {
         return Coin::where(['enabled' => true])->exists();
+    }
+
+    public static function transaction(string $hash): ?Transaction
+    {
+        return Transaction::where(['address_from' => $hash, 'success' => true])->first();
     }
 }
