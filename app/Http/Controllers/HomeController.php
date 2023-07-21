@@ -79,7 +79,7 @@ class HomeController extends BaseController
         } elseif ($coin->used_at !== null) {
             $success = false;
             $message = sprintf('Address_from %s already used', $data['address_from']);
-        } elseif ((int)$request['amount'] > $coin->amount) {
+        } elseif ((float)$request['amount'] > $coin->amount) {
             $success = false;
             $message = sprintf('Wrong amount %s - correct: %s', $request['amount'], $coin->amount);
         }
