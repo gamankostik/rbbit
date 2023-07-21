@@ -42,14 +42,18 @@ class MigrateCoinCommand extends Command
         foreach (Coin::TYPE as $type) {
             if (($handle = fopen(resource_path('data/' . $type . '.csv'), "r")) !== FALSE) {
                 while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                    Coin::create(
-                        [
-                            'number' => $data[0],
-                            'hash' => $data[1],
-                            'amount' => $data[2],
-                            'type' => $type,
-                        ]
-                    );
+                    if (!empty($data[1]) && !Coin::where(['hash' => $data[1]])->exists()) {
+                        Coin::create(
+                            [
+                                'number' => $data[0],
+                                'hash' => $data[1],
+                                'amount' => $data[2],
+                                'type' => $type,
+                            ]
+                        );
+                    } else {
+                        print_r(json_encode($data) . "   skipped \n");
+                    }
                 }
                 fclose($handle);
             }
