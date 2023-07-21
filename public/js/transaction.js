@@ -49,14 +49,36 @@ document.addEventListener('DOMContentLoaded', () => {
     input2.addEventListener('keydown', function(event) {
         const key = event.key;
 
-        // Разрешаем ввод цифр и дополнительных клавиш (Backspace, Delete, стрелки и т.д.)
-        if (!isNumericInput(key) && !isModifierKey(event)) {
+        // Разрешаем ввод цифр, точки и дополнительных клавиш (Backspace, Delete, стрелки и т.д.)
+        if (!isNumericInput(key) && !isDotInput(key) && !isBackspaceInput(event) && !isModifierKey(event)) {
             event.preventDefault();
         }
     });
 
+    // Обработчик удаления
+    input2.addEventListener('keyup', function(event) {
+        const key = event.key;
+
+        // Если нажата клавиша Backspace или Delete, разрешаем удаление
+        if (isBackspaceInput(event) || key === 'Delete') {
+            return;
+        }
+
+        // Проверяем, что введено только одна точка
+        if (isDotInput(key) && input2.value.indexOf('.') !== input2.value.lastIndexOf('.')) {
+            event.preventDefault();
+        }
+    });
     function isNumericInput(key) {
         return /^\d*$/.test(key);
+    }
+
+    function isDotInput(key) {
+        return key === '.'; // Проверяем на точку
+    }
+
+    function isBackspaceInput(event) {
+        return event.key === 'Backspace'; // Проверяем на Backspace
     }
 
     function isModifierKey(event) {
