@@ -9,6 +9,7 @@ use App\Service\CoinService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Str;
+use function GuzzleHttp\Psr7\uri_for;
 
 class HomeController extends BaseController
 {
@@ -83,7 +84,9 @@ class HomeController extends BaseController
             $message = sprintf('Wrong amount %s - correct: %s', $request['amount'], $coin->amount);
         }
 
-        $coin->update(['used_at' => new \DateTime(), 'success' => false]);
+        if ($success) {
+            $coin->update(['used_at' => new \DateTime(), 'success' => false]);
+        }
 
         Transaction::create([
             'type' => $coin->type,
