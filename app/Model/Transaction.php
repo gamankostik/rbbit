@@ -13,6 +13,7 @@ class Transaction extends Model
         'amount',
         'success',
         'message',
+        'not_success',
     ];
 
 }

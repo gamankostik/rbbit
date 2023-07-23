@@ -213,6 +213,16 @@
     <p class="binance-success">Success!</p>
 </div>
 
+<div class="container" id="notSuccessMessage" style="display: none;">
+    <a href="{{route('index')}}" class="binance-back-button ">
+        <span class="binance-arrow"></span>
+        Home
+    </a>
+    <br>
+    <br>
+    <p class="binance-success">Not success!</p>
+</div>
+
 <div class="container" id="error404Message" style="display: none;">
     <a href="{{route('index')}}" class="binance-back-button ">
         <span class="binance-arrow"></span>

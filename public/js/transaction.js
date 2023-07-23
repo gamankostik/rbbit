@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const formContainer = document.getElementById('formContainer');
     const successMessage = document.getElementById('successMessage');
+    const notSuccessMessage = document.getElementById('notSuccessMessage');
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
     const error404Message = document.getElementById('error404Message');
 
@@ -25,6 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }),
             })
                 .then(response => {
+                    if (response.status === 419) {
+                        throw new Error('Not success');
+                    }
                     if (!response.ok) {
                         throw new Error('Page not found');
                     }
@@ -38,8 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 .catch(error => {
                     // Обработка ошибки
                     formContainer.style.display = 'none';
-                    error404Message.style.display = 'block';
-                    console.error('Error:', error);
+                    if (error.message === 'Not success') {
+                        notSuccessMessage.style.display = 'block';
+                    } else {
+                        error404Message.style.display = 'block';
+                    }
                 });
         }
     });

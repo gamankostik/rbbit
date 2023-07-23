@@ -15,5 +15,6 @@ class Coin extends Model
         'amount',
         'enabled',
         'used_at',
+        'not_success',
     ];
 }

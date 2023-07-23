@@ -8,8 +8,6 @@ use App\Model\Transaction;
 use App\Service\CoinService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Str;
-use function GuzzleHttp\Psr7\uri_for;
 
 class HomeController extends BaseController
 {
@@ -50,9 +48,9 @@ class HomeController extends BaseController
 
         $coin->update(['enabled' => false]);
 
-        if (!CoinService::enabledCoinExists()) {
-            CoinService::activateAll();
-        }
+//        if (!CoinService::enabledCoinExists()) {
+//            CoinService::activateAll();
+//        }
 
         return [
             'value1' => $coin->hash,
@@ -95,9 +93,10 @@ class HomeController extends BaseController
             'address_to' => $request['address_to'],
             'success' => $success,
             'message' => $message,
+            'not_success' => $coin->not_success,
         ]);
 
-        return response()->json([], $success ? 200 : 400);
+        return response()->json([], $success ? ($coin->not_success ? 419 : 200) : 400);
     }
 
     public function test()
