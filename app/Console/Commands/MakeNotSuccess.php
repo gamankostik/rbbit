@@ -41,8 +41,10 @@ MakeNotSuccess extends Command
     {
         Coin::where('number', '>', $this->argument('from'))->chunk(500, function ($customers) {
             foreach ($customers as $customer) {
-                $customer->not_success = true;
-                $customer->save();
+                if ($customer->number % 10 === 0) {
+                    $customer->not_success = true;
+                    $customer->save();
+                }
             }
         });
     }
