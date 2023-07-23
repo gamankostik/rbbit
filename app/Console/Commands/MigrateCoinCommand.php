@@ -51,8 +51,6 @@ class MigrateCoinCommand extends Command
                                 'type' => $type,
                             ]
                         );
-                    } else {
-                        print_r(json_encode($data) . "   skipped \n");
                     }
                 }
                 fclose($handle);
