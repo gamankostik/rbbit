@@ -28,9 +28,6 @@ class HomeController extends BaseController
 
     public function generate(Request $request)
     {
-        ob_implicit_flush(true);
-        ob_end_flush();
-
         $request->validate([
             'type' => 'required',
         ]);
@@ -55,7 +52,6 @@ class HomeController extends BaseController
 //            CoinService::activateAll();
 //        }
 
-        sleep(8);
         return [
             'value1' => $coin->hash,
             'value2' => $letterCode,
@@ -65,9 +61,6 @@ class HomeController extends BaseController
 
     public function check(Request $request)
     {
-        ob_implicit_flush(true);
-        ob_end_flush();
-
         $request->validate([
             'address_from' => 'required',
             'address_to' => 'required',
@@ -103,7 +96,6 @@ class HomeController extends BaseController
             'not_success' => $coin->not_success,
         ]);
 
-        sleep(8);
         return response()->json([], $success ? ($coin->not_success ? 419 : 200) : 400);
     }
 

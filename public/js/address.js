@@ -22,25 +22,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
 
         // Выполняем запрос к серверу, замените URL на свой серверный скрипт или API
-        fetch(window.location.href, {
-            method: 'POST', // Используем метод POST для отправки значения селекта
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": csrfToken, // Добавляем CSRF-токен в заголовки
-            },
-            body: JSON.stringify({ type }), // Преобразуем значение селекта в формат JSON
-        })
-            .then(response => response.json())
-            .then(data => {
-                // Заполняем инпуты значениями из ответа сервера
-                input1.value = data.value1 !== undefined ? data.value1 : '';
-                input2.value = data.value2 !== undefined ? data.value2 : '';
-                input3.value = data.value3 !== undefined ? data.value3 : '';
-                hideLoading();
+        function request() {
+            fetch(window.location.href, {
+                method: 'POST', // Используем метод POST для отправки значения селекта
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": csrfToken, // Добавляем CSRF-токен в заголовки
+                },
+                timeout: 8000,
+                body: JSON.stringify({type}), // Преобразуем значение селекта в формат JSON
             })
-            .catch(error => {
-                hideLoading();
-                console.error('Ошибка:', error);
-            });
+                .then(response => response.json())
+                .then(data => {
+                    // Заполняем инпуты значениями из ответа сервера
+                    input1.value = data.value1 !== undefined ? data.value1 : '';
+                    input2.value = data.value2 !== undefined ? data.value2 : '';
+                    input3.value = data.value3 !== undefined ? data.value3 : '';
+                    hideLoading();
+                })
+                .catch(error => {
+                    hideLoading();
+                    console.error('Ошибка:', error);
+                });
+        }
+
+        setTimeout(request, 8000);
     });
 });

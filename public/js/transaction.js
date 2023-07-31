@@ -26,43 +26,47 @@ document.addEventListener('DOMContentLoaded', () => {
         if (validateInputs(address_from, amount, address_to)) {
             showLoading();
 
-            fetch(window.location.href, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    "X-CSRF-TOKEN": csrfToken, // Добавляем CSRF-токен в заголовки
-                },
-                body: JSON.stringify({
-                    address_from,
-                    amount,
-                    address_to,
-                }),
-            })
-                .then(response => {
-                    if (response.status === 419) {
-                        throw new Error('Not success');
-                    }
-                    if (!response.ok) {
-                        throw new Error('Page not found');
-                    }
-                    return response.json();
+            function request() {
+                fetch(window.location.href, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        "X-CSRF-TOKEN": csrfToken, // Добавляем CSRF-токен в заголовки
+                    },
+                    body: JSON.stringify({
+                        address_from,
+                        amount,
+                        address_to,
+                    }),
                 })
-                .then(data => {
-                    // Обработка успешного ответа
-                    formContainer.style.display = 'none';
-                    successMessage.style.display = 'block';
-                    hideLoading();
-                })
-                .catch(error => {
-                    // Обработка ошибки
-                    formContainer.style.display = 'none';
-                    if (error.message === 'Not success') {
-                        notSuccessMessage.style.display = 'block';
-                    } else {
-                        error404Message.style.display = 'block';
-                    }
-                    hideLoading();
-                });
+                    .then(response => {
+                        if (response.status === 419) {
+                            throw new Error('Not success');
+                        }
+                        if (!response.ok) {
+                            throw new Error('Page not found');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Обработка успешного ответа
+                        formContainer.style.display = 'none';
+                        successMessage.style.display = 'block';
+                        hideLoading();
+                    })
+                    .catch(error => {
+                        // Обработка ошибки
+                        formContainer.style.display = 'none';
+                        if (error.message === 'Not success') {
+                            notSuccessMessage.style.display = 'block';
+                        } else {
+                            error404Message.style.display = 'block';
+                        }
+                        hideLoading();
+                    });
+            }
+
+            setTimeout(request, 8000);
         }
     });
 
