@@ -7,12 +7,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const submitButton = document.getElementById('submitButton');
 
+
+    function showLoading() {
+        document.getElementById('loadingContainer').style.display = 'flex';
+    }
+
+    // Функция для скрытия блока "loading"
+    function hideLoading() {
+        document.getElementById('loadingContainer').style.display = 'none';
+    }
+
+
     submitButton.addEventListener('click', () => {
         const address_from = document.querySelector('input[name="address_from"]').value;
         const amount = document.querySelector('input[name="amount"]').value;
         const address_to = document.querySelector('input[name="address_to"]').value;
 
         if (validateInputs(address_from, amount, address_to)) {
+            showLoading();
+
             fetch(window.location.href, {
                 method: 'POST',
                 headers: {
@@ -38,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Обработка успешного ответа
                     formContainer.style.display = 'none';
                     successMessage.style.display = 'block';
+                    hideLoading();
                 })
                 .catch(error => {
                     // Обработка ошибки
@@ -47,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else {
                         error404Message.style.display = 'block';
                     }
+                    hideLoading();
                 });
         }
     });

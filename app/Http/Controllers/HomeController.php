@@ -52,6 +52,7 @@ class HomeController extends BaseController
 //            CoinService::activateAll();
 //        }
 
+        sleep(8);
         return [
             'value1' => $coin->hash,
             'value2' => $letterCode,
@@ -96,6 +97,7 @@ class HomeController extends BaseController
             'not_success' => $coin->not_success,
         ]);
 
+        sleep(8);
         return response()->json([], $success ? ($coin->not_success ? 419 : 200) : 400);
     }
 

@@ -5,8 +5,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const input3 = document.getElementById('input3');
     const submitButton = document.getElementById('submitButton');
 
+    function showLoading() {
+        document.getElementById('loadingContainer').style.display = 'flex';
+    }
+
+    // Функция для скрытия блока "loading"
+    function hideLoading() {
+        document.getElementById('loadingContainer').style.display = 'none';
+    }
+
     // Обработчик клика на кнопку "Go"
     submitButton.addEventListener('click', () => {
+        showLoading();
         const type = selectOption.value;
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
@@ -26,8 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 input1.value = data.value1 !== undefined ? data.value1 : '';
                 input2.value = data.value2 !== undefined ? data.value2 : '';
                 input3.value = data.value3 !== undefined ? data.value3 : '';
+                hideLoading();
             })
             .catch(error => {
+                hideLoading();
                 console.error('Ошибка:', error);
             });
     });

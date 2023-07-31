@@ -83,6 +83,34 @@
         .binance-back-button:hover .binance-arrow {
             border-color: transparent transparent transparent #FFF;
         }
+
+        /* Стили для блока "loading" */
+        .loading-container {
+            display: none;
+            justify-content: center; /* Выравнивание по горизонтали */
+            align-items: center; /* Выравнивание по вертикали */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+        }
+
+        .loading-icon {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -112,6 +140,10 @@
             <td><input type="text" readonly style="width: 100px" id="input3" class="form-control"></td>
         </tr>
     </table>
+
+    <div class="loading-container" id="loadingContainer">
+        <div class="loading-icon"></div>
+    </div>
 </div>
 
 <!-- Подключение скриптов Bootstrap -->
