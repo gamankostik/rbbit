@@ -28,7 +28,8 @@ class HomeController extends BaseController
 
     public function generate(Request $request)
     {
-        set_time_limit(100);
+        ob_implicit_flush(true);
+        ob_end_flush();
 
         $request->validate([
             'type' => 'required',
@@ -64,7 +65,8 @@ class HomeController extends BaseController
 
     public function check(Request $request)
     {
-        set_time_limit(100);
+        ob_implicit_flush(true);
+        ob_end_flush();
 
         $request->validate([
             'address_from' => 'required',
