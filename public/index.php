@@ -9,6 +9,7 @@
 
 define('LARAVEL_START', microtime(true));
 
+abort(404);
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
