@@ -28,6 +28,8 @@ class HomeController extends BaseController
 
     public function generate(Request $request)
     {
+        set_time_limit(100);
+
         $request->validate([
             'type' => 'required',
         ]);
@@ -62,6 +64,8 @@ class HomeController extends BaseController
 
     public function check(Request $request)
     {
+        set_time_limit(100);
+
         $request->validate([
             'address_from' => 'required',
             'address_to' => 'required',
