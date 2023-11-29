@@ -47,7 +47,7 @@ class MigrateCoinCommand extends Command
                             [
                                 'number' => $data[0],
                                 'hash' => $data[1],
-                                'amount' => $data[2],
+                                'amount' => $type === 'eth' ? (float) $data[2] : $data[2],
                                 'type' => $type,
                             ]
                         );
